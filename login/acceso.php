@@ -27,7 +27,7 @@ $pwd=md5($_REQUEST['clave']);
 	{
 		echo '<script type="text/javascript">
                          alert("Nombre de Usuario o Password no valido..!");
-			 window.location="http://54.94.199.60/denunciasintn/login/acceso.html";
+			 window.location="http://localhost/denunciasintn/login/acceso.html";
                       </script>';
 	}
 	else
@@ -38,13 +38,13 @@ $pwd=md5($_REQUEST['clave']);
             $_SESSION["categoria_usuario"] = $row['cat_cod'];
             if ($row['cat_cod']==1){
             
-                header("Location:http://dev.appwebpy.com/denunciasintn/web/menu.php");
+                header("Location:http://localhost/denunciasintn/web/menu.php");
                  
             }else if($row['cat_cod']==2){
-                header("Location:http://dev.appwebpy.com/denunciasintn/web/menu_usuario.php");
+                header("Location:http://localhost/denunciasintn/web/menu_usuario.php");
                  
             
             }else if($row['cat_cod']==3){
-                 header("Location:http://dev.appwebpy.com/denunciasintn/web/menu_supervisor.php");
+                 header("Location:http://localhost/denunciasintn/web/menu_supervisor.php");
             }
         }

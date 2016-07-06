@@ -25,17 +25,17 @@ $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'];
         if(isset($_POST['modificar'])){
             pg_query("update denuncias set den_confirm='$estadoM' where den_cod=$codigoModif");
             $query = '';
-            header("Refresh:0; url=http://dev.appwebpy.com/denunciasintn/web/denuncias/ABMdenuncia.php");
+            header("Refresh:0; url=http://localhost/denunciasintn/web/denuncias/ABMdenuncia.php");
         }
         //Si es Eliminar
         if(isset($_POST['borrar'])){
             pg_query("update denuncias set den_activo='f',den_confirm='f' WHERE den_cod=$codigoElim");
-            header("Refresh:0; url=http://dev.appwebpy.com/denunciasintn/web/denuncias/ABMdenuncia.php");
+            header("Refresh:0; url=http://localhost/denunciasintn/web/denuncias/ABMdenuncia.php");
 	}
          if(isset($_POST['submit'])){
             
             subirImagen($codigoModif, $observaciones,$archivoResolucion,$codigoModif,$veredicto);
-            header("Refresh:0; url=http://dev.appwebpy.com/denunciasintn/web/denuncias/denunciasAtendidas.php");
+            header("Refresh:0; url=http://localhost/denunciasintn/web/denuncias/denunciasAtendidas.php");
 	}
         
         function subirImagen($codigoModif,$observaciones,$archivoResolucion,$codigoModif,$veredicto){ 
@@ -63,11 +63,11 @@ $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'];
         @is_uploaded_file($_FILES[$fieldname]['tmp_name']) 
             or error('no es una subida http', $uploadForm); 
 
-        @getimagesize($_FILES[$fieldname]['tmp_name']) 
-            or error('solo esta permitido subir imagenes', $uploadForm); 
+       // @getimagesize($_FILES[$fieldname]['tmp_name']) 
+       // or error('solo esta permitido subir imagenes', $uploadForm); 
 
         $now = time();
-        $nombreimagen='http://dev.appwebpy.com/denunciasintn/web/class/respuestas/'.$now.$_FILES[$fieldname]['name'];
+        $nombreimagen='http://localhost/denunciasintn/web/class/respuestas/'.$now.$_FILES[$fieldname]['name'];
         while(file_exists($uploadFilename = $uploadsDirectory.$now.$_FILES[$fieldname]['name'])) 
         { 
             $now++; 
@@ -80,7 +80,7 @@ $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'];
         pg_query("insert into respuestas(den_cod,res_fecha,res_obs,res_url,res_activo,res_veredicto) values($codigoModif,'now()','$observaciones','$nombreimagen','t','$veredicto')");
         pg_query("update denuncias set den_activo='f' WHERE den_cod=$codigoModif");
         //ejecucion del query
-        header("Refresh:0; url=http://dev.appwebpy.com/denunciasintn/web/galerias/ABMgaleria.php");
+        header("Refresh:0; url=http://localhost/denunciasintn/web/galerias/ABMgaleria.php");
         
        // header('Location: ' . $uploadSuccess); 
 
@@ -88,7 +88,7 @@ $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'];
 
 function error($error, $location, $seconds = 5) 
         { 
-            header("Refresh: $seconds; URL=http://dev.appwebpy.com/denunciasintn/web/respuestas/ABMrespuesta.php"); 
+            header("Refresh: $seconds; URL=http://localhost/denunciasintn/web/respuestas/ABMrespuesta.php"); 
             echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"'.
             '"http://www.w3.org/TR/html4/strict.dtd">'.
             '<html lang="es">'.

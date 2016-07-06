@@ -3,7 +3,7 @@
         //conecta al 192.168.56.100
         function conexionlocal()
         {
-            return $dbconn = pg_connect("host=54.94.199.60 port=5432 dbname=denunciasintn user=postgres password=2016aws.Postgres.ubuntu"
+            return $dbconn = pg_connect("host=localhost port=5432 dbname=denunciasintn user=postgres password=postgres"
                     . "")or die ('no se pudo conectar a la base de datos');
         } 
         //funcion que selecciona a la base de Datos

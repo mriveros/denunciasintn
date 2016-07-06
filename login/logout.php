@@ -1,5 +1,5 @@
 <?php 
 	session_start(); 
 	session_destroy(); 
-	header("Location:http://dev.appwebpy.com/denunciasintn/login/acceso.html");
+	header("Location:http://localhost/denunciasintn/login/acceso.html");
 ?>

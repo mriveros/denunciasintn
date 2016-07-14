@@ -7,7 +7,9 @@ session_start();
  * Año: 2015
  * Sistema de Estaciones ONM INTN
  */
- include '../web/funciones.php';
+include '../web/funciones.php';
+//$ruta="192.168.0.99/web";
+$ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/web";
  conexionlocal();
 $usr= $_REQUEST['username'];
 $pwd=md5($_REQUEST['clave']);
@@ -38,13 +40,13 @@ $pwd=md5($_REQUEST['clave']);
             $_SESSION["categoria_usuario"] = $row['cat_cod'];
             if ($row['cat_cod']==1){
             
-                header("Location:http://localhost/denunciasintn/web/menu.php");
+                header("Location:http://$ruta/denunciasintn/web/menu.php");
                  
             }else if($row['cat_cod']==2){
-                header("Location:http://localhost/denunciasintn/web/menu_usuario.php");
+                header("Location:http://$ruta/denunciasintn/web/menu_usuario.php");
                  
             
             }else if($row['cat_cod']==3){
-                 header("Location:http://localhost/denunciasintn/web/menu_supervisor.php");
+                 header("Location:http://$ruta/denunciasintn/web/menu_supervisor.php");
             }
         }

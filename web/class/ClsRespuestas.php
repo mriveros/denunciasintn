@@ -7,6 +7,7 @@
 session_start();
     $codusuario=  $_SESSION["codigo_usuario"];   
     include '../funciones.php';
+    $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'];
     conexionlocal();
     
     //Datos del Form Agregar
@@ -33,18 +34,19 @@ session_start();
             
             modificarImagen($descripcionM,$estadoM,$codigoModif,$veredicto);
             $query = '';
-            header("Refresh:0; url=http://localhost/denunciasintn/web/respuestas/ABMrespuesta.php");
+            header("Refresh:0; url=http://$ruta/web/denunciasintn/web/respuestas/ABMrespuesta.php");
         }
         //Si es Eliminar
         if(isset($_POST['borrar'])){
             pg_query("update respuestas set res_activo='f' WHERE res_cod=$codigoElim");
-            header("Refresh:0; url=http://localhost/denunciasintn/web/respuestas/ABMrespuesta.php");
+            header("Refresh:0; url=http://$ruta/web/denunciasintn/web/respuestas/ABMrespuesta.php");
 	}
         
         
         
         //Clase para alzar imagenes
 function modificarImagen($descripcion,$estado,$codigoModif,$veredicto){ 
+    $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'];
 
         $directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']); 
 
@@ -73,7 +75,7 @@ function modificarImagen($descripcion,$estado,$codigoModif,$veredicto){
        //     or error('solo esta permitido subir imagenes', $uploadForm); 
 
         $now = time();
-        $nombreimagen='http://localhost/denunciasintn/web/class/respuestas/'.$now.$_FILES[$fieldname]['name'];
+        $nombreimagen=''.$ruta.'web/denunciasintn/web/class/respuestas/'.$now.$_FILES[$fieldname]['name'];
         while(file_exists($uploadFilename = $uploadsDirectory.$now.$_FILES[$fieldname]['name'])) 
         { 
             $now++; 
@@ -96,7 +98,8 @@ function modificarImagen($descripcion,$estado,$codigoModif,$veredicto){
 }
 function error($error, $location, $seconds = 5) 
         { 
-            header("Refresh: $seconds; URL=http://localhost/denunciasintn/web/respuestas/ABMrespuesta.php"); 
+    $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'];
+            header("Refresh: $seconds; URL=http://$ruta/web/denunciasintn/web/respuestas/ABMrespuesta.php"); 
             echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"'.
             '"http://www.w3.org/TR/html4/strict.dtd">'.
             '<html lang="es">'.

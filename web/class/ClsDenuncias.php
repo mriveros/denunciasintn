@@ -2,7 +2,7 @@
 /*
  * Autor: Marcos A. Riveros.
  * Año: 2015
- * Sistema de Compras y Pagos DiscoA 2.0
+ * Sistema Servidor INTN Denuncias Ciudadanas
  */
 session_start();
 $codusuario=  $_SESSION["codigo_usuario"];
@@ -25,20 +25,21 @@ $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'];
         if(isset($_POST['modificar'])){
             pg_query("update denuncias set den_confirm='$estadoM' where den_cod=$codigoModif");
             $query = '';
-            header("Refresh:0; url=http://localhost/denunciasintn/web/denuncias/ABMdenuncia.php");
+            header("Refresh:0; url=http://$ruta/web/denunciasintn/web/denuncias/ABMdenuncia.php");
         }
         //Si es Eliminar
         if(isset($_POST['borrar'])){
             pg_query("update denuncias set den_activo='f',den_confirm='f' WHERE den_cod=$codigoElim");
-            header("Refresh:0; url=http://localhost/denunciasintn/web/denuncias/ABMdenuncia.php");
+            header("Refresh:0; url=http://$ruta/web/denunciasintn/web/denuncias/ABMdenuncia.php");
 	}
          if(isset($_POST['submit'])){
             
             subirImagen($codigoModif, $observaciones,$archivoResolucion,$codigoModif,$veredicto);
-            header("Refresh:0; url=http://localhost/denunciasintn/web/denuncias/denunciasAtendidas.php");
+            header("Refresh:0; url=http://$ruta/web/denunciasintn/web/denuncias/denunciasAtendidas.php");
 	}
         
         function subirImagen($codigoModif,$observaciones,$archivoResolucion,$codigoModif,$veredicto){ 
+        $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'];
 
         $directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']); 
 
@@ -67,7 +68,7 @@ $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'];
        // or error('solo esta permitido subir imagenes', $uploadForm); 
 
         $now = time();
-        $nombreimagen='http://localhost/denunciasintn/web/class/respuestas/'.$now.$_FILES[$fieldname]['name'];
+        $nombreimagen=''.$ruta.'/web/denunciasintn/web/class/respuestas/'.$now.$_FILES[$fieldname]['name'];
         while(file_exists($uploadFilename = $uploadsDirectory.$now.$_FILES[$fieldname]['name'])) 
         { 
             $now++; 
@@ -80,7 +81,7 @@ $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'];
         pg_query("insert into respuestas(den_cod,res_fecha,res_obs,res_url,res_activo,res_veredicto) values($codigoModif,'now()','$observaciones','$nombreimagen','t','$veredicto')");
         pg_query("update denuncias set den_activo='f' WHERE den_cod=$codigoModif");
         //ejecucion del query
-        header("Refresh:0; url=http://localhost/denunciasintn/web/galerias/ABMgaleria.php");
+        header("Refresh:0; url=$ruta.'/web/denunciasintn/web/respuesta/ABMrespuesta.php");
         
        // header('Location: ' . $uploadSuccess); 
 
@@ -88,7 +89,8 @@ $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'];
 
 function error($error, $location, $seconds = 5) 
         { 
-            header("Refresh: $seconds; URL=http://localhost/denunciasintn/web/respuestas/ABMrespuesta.php"); 
+        $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'];
+            header("Refresh: $seconds; URL=http://$ruta/web/denunciasintn/web/respuestas/ABMrespuesta.php"); 
             echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"'.
             '"http://www.w3.org/TR/html4/strict.dtd">'.
             '<html lang="es">'.

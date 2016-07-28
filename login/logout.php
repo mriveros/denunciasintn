@@ -1,5 +1,6 @@
 <?php 
 	session_start(); 
-	session_destroy(); 
-	header("Location:http://localhost/denunciasintn/login/acceso.html");
+	session_destroy();
+    $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/web";
+	header("Location:http://$ruta/denunciasintn/login/acceso.html");
 ?>

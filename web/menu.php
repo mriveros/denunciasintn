@@ -10,7 +10,8 @@
     $ReservasNoCOnfirmadas=pg_result($consulta2,0,'cantidad');
     $ReservasRechazadas=pg_result($consulta3,0,'cantidad');
     $ReservasConfirmadas=pg_result($consulta4,0,'cantidad');  
-    $ruta="dev.appwebpy.com";
+    //$ruta="192.168.0.99/web";
+    $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/web";
 ?>
 <!DOCTYPE html>
 <html lang="es">

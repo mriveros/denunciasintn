@@ -53,10 +53,9 @@ function Header()
     $this->Cell(50,10,'Nome',1,1,'L',1);*/
     
     $this->Cell(25,10,'Item',1,0,'C',1);
-    $this->Cell(50,10,'Motivo',1,0,'C',1);
-    $this->Cell(100,10,'Observacion',1,0,'C',1);
-    $this->Cell(40,10,'Empresa',1,0,'C',1);
-    $this->Cell(80,10,'Direccion',1,0,'C',1);
+    $this->Cell(100,10,'Motivo',1,0,'C',1);
+    $this->Cell(50,10,'Empresa',1,0,'C',1);
+    $this->Cell(100,10,'Direccion',1,0,'C',1);
     $this->Cell(20,10,'Fecha',1,0,'C',1);
     $this->Cell(30,10,'Nombre',1,0,'C',1);
     $this->Cell(15,10,'Cedula',1,0,'C',1);
@@ -85,14 +84,9 @@ $pdf->SetFont('Arial','B',10);
 
 
 //Set font and colorss
-
-
-
-
 $conectate=pg_connect("host=localhost port=5432 dbname=denunciasintn user=postgres password=postgres"
                     . "")or die ('Error al conectar a la base de datos');
-$consulta=pg_exec($conectate,"SELECT * 
-                    from denuncias
+$consulta=pg_exec($conectate,"SELECT * from denuncias
                     where den_fecha >= '$fechadesde' and den_fecha<='$fechahasta'  order by den_fecha ");
 
 $numregs=pg_numrows($consulta);
@@ -107,7 +101,6 @@ while($i<$numregs)
     
    
     $motivo=pg_result($consulta,$i,'den_motivo');
-    $observacion=pg_result($consulta,$i,'den_obs');
     $empresa=pg_result($consulta,$i,'den_empresa');
     $direccion=pg_result($consulta,$i,'den_direccion');
     $fecha=pg_result($consulta,$i,'den_fecha');
@@ -131,10 +124,9 @@ while($i<$numregs)
    
      
     $pdf->Cell(25,5,$i+1,1,0,'C',$fill);
-    $pdf->Cell(50,5,$motivo,1,0,'L',$fill);
-    $pdf->Cell(100,5,$observacion,1,0,'L',$fill);
-    $pdf->Cell(40,5,$empresa,1,0,'L',$fill);
-    $pdf->Cell(80,5,$direccion,1,0,'L',$fill);
+    $pdf->Cell(100,5,$motivo,1,0,'L',$fill);
+    $pdf->Cell(50,5,$empresa,1,0,'L',$fill);
+    $pdf->Cell(100,5,$direccion,1,0,'L',$fill);
     $pdf->Cell(20,5,$fecha,1,0,'C',$fill);
     $pdf->Cell(30,5,$nombre,1,0,'L',$fill);
     $pdf->Cell(15,5,$ci,1,0,'C',$fill);

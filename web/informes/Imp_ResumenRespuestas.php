@@ -45,6 +45,7 @@ function Header()
     $this->SetFont('Arial','B',8);
     $this->SetTitle('RESUMEN DE RESPUESTAS EMITIDAS');
     $this->Cell(300,5,'DENUNCIAS CIUDADANAS',100,100,'C');//Titulo
+     $this->Cell(300,10,'RESUMEN DE RESPUESTAS EMITIDAS',100,100,'C');//Titulo
     $this->SetFillColor(153,192,141);
     $this->SetTextColor(255);
     $this->SetDrawColor(153,192,141);
@@ -53,11 +54,11 @@ function Header()
     $this->Cell(50,10,'Nome',1,1,'L',1);*/
     
     $this->Cell(25,10,'Item',1,0,'C',1);
-    $this->Cell(50,10,'Motivo',1,0,'C',1);
-    $this->Cell(140,10,'Observacion',1,0,'C',1);
-    $this->Cell(40,10,'Empresa',1,0,'C',1);
-    $this->Cell(100,10,'Respuesta',1,0,'C',1);
-    $this->Cell(15,10,'Fecha',1,1,'C',1);
+    $this->Cell(25,10,'Fecha Den',1,0,'C',1);
+    $this->Cell(90,10,'Motivo',1,0,'C',1);
+    $this->Cell(80,10,'Empresa',1,0,'C',1);
+    $this->Cell(90,10,'Respuesta',1,0,'C',1);
+    $this->Cell(25,10,'Fecha Res',1,1,'C',1);
    
    
 
@@ -89,7 +90,7 @@ $pdf->SetFont('Arial','B',10);
 
 $conectate=pg_connect("host=localhost port=5432 dbname=denunciasintn user=postgres password=postgres"
                     . "")or die ('Error al conectar a la base de datos');
-$consulta=pg_exec($conectate,"SELECT den.den_cod,den.den_motivo,den.den_obs,den.den_empresa,den.den_direccion,den.den_fecha,res.res_obs,res.res_fecha
+$consulta=pg_exec($conectate,"SELECT den.den_cod,den.den_motivo,den.den_fecha,den.den_obs,den.den_empresa,den.den_direccion,den.den_fecha,res.res_obs,res.res_fecha
                     from respuestas res, denuncias den
                     where res.den_cod=den.den_cod and res.res_fecha >= '$fechadesde' and res.res_fecha<='$fechahasta'  order by res_fecha ");
 
@@ -103,9 +104,8 @@ $i=0;
 while($i<$numregs)
 {
     
-   
+    $fechadenuncia=pg_result($consulta,$i,'den_fecha');
     $motivo=pg_result($consulta,$i,'den_motivo');
-    $observacion=pg_result($consulta,$i,'den_obs');
     $empresa=pg_result($consulta,$i,'den_empresa');
     $obsRespuesta=pg_result($consulta,$i,'res_obs');
     $fechaRespuesta=pg_result($consulta,$i,'res_fecha');
@@ -113,11 +113,11 @@ while($i<$numregs)
    
      
     $pdf->Cell(25,5,$i+1,1,0,'C',$fill);
-    $pdf->Cell(50,5,$motivo,1,0,'L',$fill);
-    $pdf->Cell(140,5,$observacion,1,0,'L',$fill);
-    $pdf->Cell(40,5,$empresa,1,0,'L',$fill);
-    $pdf->Cell(100,5,$obsRespuesta,1,0,'L',$fill);
-    $pdf->Cell(15,5,$fechaRespuesta,1,1,'C',$fill);
+    $pdf->Cell(25,5,$fechadenuncia,1,0,'L',$fill);
+    $pdf->Cell(90,5,$motivo,1,0,'L',$fill);
+    $pdf->Cell(80,5,$empresa,1,0,'L',$fill);
+    $pdf->Cell(90,5,$obsRespuesta,1,0,'L',$fill);
+    $pdf->Cell(25,5,$fechaRespuesta,1,1,'C',$fill);
   
    
     

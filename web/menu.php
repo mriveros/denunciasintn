@@ -1,15 +1,16 @@
 <?php
   
     $conectate=pg_connect("host=localhost port=5432 dbname=denunciasintn user=postgres password=postgres")or die ('Error al conectar a la base de datos');
-    $consulta1= pg_exec($conectate,"select count(den_cod) as cantidad from denuncias where den_fecha < now()");
-    $consulta2= pg_exec($conectate,"select count(den_cod) as cantidad from denuncias where den_activo='t'   and den_fecha < now()");
-    $consulta3= pg_exec($conectate,"select count(den_cod) as cantidad from denuncias where den_activo='f' and den_fecha < now()");
-    $consulta4= pg_exec($conectate,"select count(den_cod) as cantidad from denuncias where den_activo='t'  and den_fecha < now()");
+    $consulta1= pg_exec($conectate,"select count(den.den_cod) as cantidad from denuncias den where den_activo='t' and den_confirm='f'");
+    $consulta2= pg_exec($conectate,"select count(den.den_cod) as cantidad from denuncias den where den_activo='t' and den_confirm='t'");
+    $consulta3= pg_exec($conectate,"select count(res_cod) as cantidad from respuestas where res_activo='t'  and res_fecha < now()");
+    $consulta4= pg_exec($conectate,"select count(den.den_cod) as cantidad from denuncias");
 
-    $cantidadReservas=pg_result($consulta1,0,'cantidad');
-    $ReservasNoCOnfirmadas=pg_result($consulta2,0,'cantidad');
-    $ReservasRechazadas=pg_result($consulta3,0,'cantidad');
-    $ReservasConfirmadas=pg_result($consulta4,0,'cantidad');  
+    $denuncias_por_atender=pg_result($consulta1,0,'cantidad');
+    $denuncias_atendidas=pg_result($consulta2,0,'cantidad');
+    $denuncias_respondidas=pg_result($consulta3,0,'cantidad');
+    $total_denuncias=pg_result($consulta4,0,'cantidad');
+    
     //$ruta="192.168.0.99/web";
     $ruta=$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT']."/web";
 ?>
@@ -70,10 +71,10 @@
                                 <div>
                                     <p>
                                         <strong>Denuncias Recibidas</strong>
-                                        <span class="pull-right text-muted"><?php echo $ReservasConfirmadas;?> Denuncias</span>
+                                        <span class="pull-right text-muted"><?php echo $denuncias_por_atender;?> Denuncias</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo $ReservasConfirmadas;?>" aria-valuemin="0" aria-valuemax="<?php echo $cantidadReservas;?>" style="width: <?php echo $cantidadReservas;?>%">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo $denuncias_por_atender;?>" aria-valuemin="0" aria-valuemax="<?php echo $total_denuncias;?>" style="width: <?php echo $denuncias_por_atender;?>%">
                                             <span class="sr-only"></span>
                                         </div>
                                     </div>
@@ -86,10 +87,10 @@
                                 <div>
                                     <p>
                                         <strong>Denuncias Atendidas</strong>
-                                        <span class="pull-right text-muted"><?php echo $ReservasNoCOnfirmadas;?> Denuncias</span>
+                                        <span class="pull-right text-muted"><?php echo $denuncias_atendidas;?> Denuncias</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo $ReservasNoCOnfirmadas;?>" aria-valuemin="0" aria-valuemax="<?php echo $cantidadReservas;?>" style="width: <?php echo $cantidadReservas;?>%">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo $denuncias_atendidas;?>" aria-valuemin="0" aria-valuemax="<?php echo $total_denuncias;?>" style="width: <?php echo $denuncias_atendidas;?>%">
                                             <span class="sr-only">20% Complete</span>
                                         </div>
                                     </div>
@@ -102,10 +103,10 @@
                                 <div>
                                     <p>
                                         <strong>Denuncias Resueltas</strong>
-                                        <span class="pull-right text-muted"><?php echo $ReservasRechazadas;?> Denuncias</span>
+                                        <span class="pull-right text-muted"><?php echo $denuncias_respondidas;?> Denuncias</span>
                                     </p>
                                     <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo $ReservasRechazadas;?>" aria-valuemin="0" aria-valuemax="<?php echo $cantidadReservas;?>" style="width: <?php echo $cantidadReservas;?>%">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo $denuncias_respondidas;?>" aria-valuemin="0" aria-valuemax="<?php echo $total_denuncias;?>" style="width: <?php echo $denuncias_respondidas;?>%">
                                             <span class="sr-only">20% Complete</span>
                                         </div>
                                     </div>

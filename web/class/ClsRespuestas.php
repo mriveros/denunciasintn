@@ -75,7 +75,7 @@ function modificarImagen($descripcion,$estado,$codigoModif,$veredicto){
        //     or error('solo esta permitido subir imagenes', $uploadForm); 
 
         $now = time();
-        $nombreimagen='http://www.intn.gov.py:10001/web/denunciasintn/web/class/respuestas/'.$now.$_FILES[$fieldname]['name'];
+        $nombreimagen=''.$ruta.'web/denunciasintn/web/class/respuestas/'.$now.$_FILES[$fieldname]['name'];
         while(file_exists($uploadFilename = $uploadsDirectory.$now.$_FILES[$fieldname]['name'])) 
         { 
             $now++; 

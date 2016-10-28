@@ -12,7 +12,6 @@ $motivo = utf8_decode($_REQUEST['motivo']);
 $observacion = utf8_decode($_REQUEST['observacion']);
 $ciudad = utf8_decode($_REQUEST['ciudad']);
 $imagen = $_REQUEST['imagen'];
-
 $imagenUrl='http://www.intn.gov.py:10001/web/denunciasintn/web/class/denuncias/'.$imagen.'.jpg';
 $query = "INSERT INTO denuncias(den_motivo,den_obs,den_empresa,den_direccion,den_fecha,den_posx,den_posy,den_imagen,den_activo,den_confirm,den_nombre,den_ci,den_telef,den_ciudad)VALUES ('$motivo','$observacion','$empresa','$direccion',now(),0,0,'$imagenUrl','t','f','$nombre','$cedula','$telefono','$ciudad');";
 //ejecucion del query

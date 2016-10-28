@@ -190,6 +190,8 @@
                                     <a href="http://<?php echo $ruta;?>/denunciasintn/web/informes/frmResumenDenunciasRechazadas.php">Denuncias Rechazadas</a>
                                     <a href="http://<?php echo $ruta;?>/denunciasintn/web/informes/frmResumenDenunciasAtendidas.php">Denuncias Atendidas</a>
                                     <a href="http://<?php echo $ruta;?>/denunciasintn/web/informes/frmResumenRespuestas.php">Respuestas Emitidas</a>
+                                    <a href="http://<?php echo $ruta;?>/denunciasintn/web/informes/frmResumenRespuestas.php">Respuestas Emitidas a favor de Clientes</a>
+                                    <a href="http://<?php echo $ruta;?>/denunciasintn/web/informes/frmResumenRespuestas.php">Respuestas Emitidas a favor de Empresas</a>
                                 </li>
                                 
                             </ul>

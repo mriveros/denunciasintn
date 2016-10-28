@@ -51,7 +51,6 @@ function Header()
     $empresa=pg_result($consulta,0,'den_empresa');
     $motivo=pg_result($consulta,0,'den_motivo');
     $direccion=pg_result($consulta,0,'den_direccion');
-    $ciudad=pg_result($consulta,0,'den_ciudad');
    
     //table header CABECERA        
     $this->SetFont('Arial','B',10);
@@ -64,13 +63,11 @@ function Header()
     $this->text(15,83,'Empresa:');
     $this->text(15,93,'Motivo:');
     $this->text(15,103,'Direccion:');
-    $this->text(15,113,'Ciudad:');
     $this->SetFont('Arial','',10);
     $this->text(30,73,$fecha);
     $this->text(35,83,$empresa);
     $this->text(29,93,$motivo);
     $this->text(35,103,$direccion);
-    $this->text(35,113,$ciudad);
     //---------------------Encabezado Derecha--------------------------------
    
     

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['codigo_usuario']))
-header("Location:http://localhost/denunciasintn/login/acceso.html");
+header("Location:http://104.236.113.194/denunciasintn/login/acceso.html");
 $catego=  $_SESSION["categoria_usuario"];
 
 ?>
@@ -81,6 +81,9 @@ $catego=  $_SESSION["categoria_usuario"];
                         document.getElementById("txtNombre").value = nombre;
                         document.getElementById("txtCedula").value = cedula;
                         document.getElementById("txtTelefono").value = telefono;
+                        
+                  
+			
 			});
 		};
                 function imprimirDenuncia(codigo){

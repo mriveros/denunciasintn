@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['codigo_usuario']))
-header("Location:http://localhost/denunciasintn/login/acceso.html");
+header("Location:http://104.236.113.194/denunciasintn/login/acceso.html");
 $catego=  $_SESSION["categoria_usuario"];
 $codusuario=  $_SESSION["codigo_usuario"];
 ?>

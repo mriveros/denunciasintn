@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['codigo_usuario']))
-header("Location:http://104.236.113.194/denunciasintn/login/acceso.html");
+header("Location:http://localhost/denunciasintn/login/acceso.html");
 $catego=  $_SESSION["categoria_usuario"];
 
 ?>
@@ -81,10 +81,11 @@ $catego=  $_SESSION["categoria_usuario"];
                         document.getElementById("txtNombre").value = nombre;
                         document.getElementById("txtCedula").value = cedula;
                         document.getElementById("txtTelefono").value = telefono;
-                        
-                  
-			
 			});
+		};
+                function imprimirDenuncia(codigo){
+                   
+                    document.getElementById("txtCodigoImprimir").value = codigo;
 		};
 	</script>
 </head>
@@ -157,6 +158,7 @@ $catego=  $_SESSION["categoria_usuario"];
                         echo "<td style='display:none'>".$row1["den_ci"]."</td>";
                         echo "<td style='display:none'>".$row1["den_telef"]."</td>";
                         echo "<td>";?>
+                         <a onclick='imprimirDenuncia(<?php echo $row1["den_cod"];?>)' class="btn btn-info  btn-xs active" data-toggle="modal" data-target="#modalimprimir" role="button">Imprimir</a>
                         <a onclick='atenderDenuncia(<?php echo $row1["den_cod"];?>)' class="btn btn-danger btn-xs active" data-toggle="modal" data-target="#modalmod" role="button">Terminar</a>
                         <?php
                         echo "</td></tr>";
@@ -223,6 +225,35 @@ $catego=  $_SESSION["categoria_usuario"];
                                         <div class="modal-footer">
 					<button type="reset" onclick="location.reload();" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
 					<button type="submit" id="submit" value="Subir Imagen"  name="submit" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                        </form>
+				</div>
+				
+				<!-- Modal Footer -->
+				
+			</div>
+		</div>
+	</div>
+        <div class="modal fade" id="modalimprimir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header"><button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h3 class="modal-title" id="myModalLabel"><i class="glyphicon glyphicon-pencil"></i>Imprimir Denuncia..</h3>
+				</div>
+				<!-- Modal Body -->
+				<div class="modal-body">
+                                    <form  id="upload" enctype="multipart/form-data"  autocomplete="off" class="form-horizontal" name="modificarform" action="../informes/Imp_Denuncia.php"  method="post" role="form">
+                                        <div class="form-group">
+                                            <div class="col-sm-10">
+                                            <input type="hidden" name="txtCodigoImprimir" class="form-control" id="txtCodigoImprimir"  />
+                                            </div>
+					</div>
+                                        <p>Se imprimirá el Registro de Denuncia..</p>
+                                        <div class="modal-footer">
+					<button type="reset" onclick="location.reload();" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+					<button type="submit" id="submit" value="Subir Imagen"  name="submit" class="btn btn-primary">Imprimir</button>
                                         </div>
                                         </form>
 				</div>

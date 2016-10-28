@@ -91,7 +91,7 @@ function modificarImagen($descripcion,$estado,$codigoModif,$veredicto){
         $ejecucion = pg_query($query)or die('Error al realizar la carga');
         $query = '';
         echo"cargo";
-        //header("Refresh:0; url=http://104.236.113.194/denunciasintn/web/respuestas/ABMrespuesta.php");
+        //header("Refresh:0; url=http://localhost/denunciasintn/web/respuestas/ABMrespuesta.php");
         
        // header('Location: ' . $uploadSuccess); 
 

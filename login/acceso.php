@@ -29,7 +29,7 @@ $pwd=md5($_REQUEST['clave']);
 	{
 		echo '<script type="text/javascript">
                          alert("Nombre de Usuario o Password no valido..!");
-			 window.location="http://localhost/denunciasintn/login/acceso.html";
+			 window.location="http://localhost/web/denunciasintn/login/acceso.html";
                       </script>';
 	}
 	else

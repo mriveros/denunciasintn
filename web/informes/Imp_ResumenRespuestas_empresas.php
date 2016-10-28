@@ -45,7 +45,7 @@ function Header()
     $this->SetFont('Arial','B',8);
     $this->SetTitle('RESUMEN DE RESPUESTAS EMITIDAS');
     $this->Cell(300,5,'DENUNCIAS CIUDADANAS',100,100,'C');//Titulo
-     $this->Cell(300,10,'RESUMEN DE RESPUESTAS EMITIDAS',100,100,'C');//Titulo
+     $this->Cell(300,10,'RESUMEN DE RESPUESTAS EMITIDAS A FAVOR DE EMPRESAS',100,100,'C');//Titulo
     $this->SetFillColor(153,192,141);
     $this->SetTextColor(255);
     $this->SetDrawColor(153,192,141);
